@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Age Calculator</title>
+    <meta name="description" content="Calculate your exact age in years, months, and days from your date of birth instantly with our free online age calculator tool.">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #2c3a50;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        input[type="date"]:focus {
+            border-color: #3498db;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <p>Select your date of birth to calculate your exact age</p>
+        
+        <input type="date" id="dob-input">
+        <button class="btn" onclick="calculateAge()">Calculate Age</button>
+
+        <div class="result" id="result-div"></div>
+    </div>
+
+    <!-- SEO Content -->
+    <div style="max-width: 600px; margin: 30px auto; color: #555; font-size: 14px; line-height: 1.6; text-align: left; padding: 0 10px;">
+        <h3>About Free Age Calculator</h3>
+        <p>Welcome to our free online age calculator tool. If you want to <b>find your exact age in years, months, and days</b> from your date of birth, this tool does it instantly. Fast, accurate, and completely free to use.</p>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const dobInput = document.getElementById("dob-input").value;
+            const resultDiv = document.getElementById("result-div");
+
+            if (!dobInput) {
+                alert("Please select your date of birth first!");
+                resultDiv.innerHTML = "";
+                return;
+            }
+
+            const dob = new Date(dobInput);
+            const today = new Date();
+
+            if (dob > today) {
+                alert("Date of birth cannot be in the future!");
+                resultDiv.innerHTML = "";
+                return;
+            }
+
+            let years = today.getFullYear() - dob.getFullYear();
+            let months = today.getMonth() - dob.getMonth();
+            let days = today.getDate() - dob.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            resultDiv.innerHTML = `Your Age: ${years} Years, ${months} Months, and ${days} Days`;
+        }
+    </script>
+
+</body>
+</html>
